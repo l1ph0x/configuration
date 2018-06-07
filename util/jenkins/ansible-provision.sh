@@ -178,7 +178,7 @@ if [[ -z $journals ]]; then
 fi
 
 if [[ -z $journals_version ]]; then
-  journals_version="master"
+  journals_version="tuchfarber/add_mgmt_cmd_for_themed_site_creation"
 fi
 
 

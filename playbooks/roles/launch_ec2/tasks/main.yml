@@ -107,7 +107,21 @@
   delay: 30
   with_nested:
     - "{{ ec2.instances }}"
-    - "{{ WHITELABEL_DNS }}"
+    # leave out until sandbox-internal PR lands- "{{ WHITELABEL_DNS }}"
+    - ["mitxpro-{{ dns_name }}.{{ dns_zone }}",
+      "ecommerce-mitxpro-{{ dns_name }}.{{ dns_zone }}",
+      "discovery-mitxpro-{{ dns_name }}.{{ dns_zone }}",
+      "credentials-mitxpro-{{ dns_name }}.{{ dns_zone }}",
+      "journals-mitxpro-{{ dns_name }}.{{ dns_zone }}",
+      "hms-{{ dns_name }}.{{ dns_zone }}",
+      "ecommerce-hms-{{ dns_name }}.{{ dns_zone }}",
+      "discovery-hms-{{ dns_name }}.{{ dns_zone }}",
+      "credentials-hms-{{ dns_name }}.{{ dns_zone }}",
+      "journals-hms-{{ dns_name }}.{{ dns_zone }}",
+      "wharton-{{ dns_name }}.{{ dns_zone }}",
+      "ecommerce-wharton-{{ dns_name }}.{{ dns_zone }}",
+      "discovery-wharton-{{ dns_name }}.{{ dns_zone }}",
+      "credentials-wharton-{{ dns_name }}.{{ dns_zone }}"]
 
 - name: Add new instance to host group
   local_action:
