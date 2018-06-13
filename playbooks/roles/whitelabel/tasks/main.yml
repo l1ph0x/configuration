@@ -47,3 +47,4 @@
       --port "80"
   become_user: "{{ journals_user }}"
   environment: "{{ journals_environment }}"
+  when: "{{ JOURNALS_ENABLED }}"
