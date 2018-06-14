@@ -20,6 +20,17 @@
 # Example play:
 #
 #
+- name: Create LMS catalog integration
+  shell: >
+    {{ COMMON_BIN_DIR }}/python.edxapp {{ COMMON_BIN_DIR }}/manage.edxapp lms --settings={{ COMMON_EDXAPP_SETTINGS }}
+    create_catalog_integrations --enabled --internal_api_url {{ EDXAPP_DISCOVERY_API_URL }}
+    --service_username {{ DISCOVERY_SERVICE_USER_NAME }}
+  become_user: "{{ edxapp_user }}"
+  environment: "{{ edxapp_environment }}"
+  tags:
+    - manage
+    - manage:db
+
 - name: create web-writable journal data dirs
   file:
     path: "{{ item }}"
