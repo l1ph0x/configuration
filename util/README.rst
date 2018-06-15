@@ -35,7 +35,7 @@ To modify configuration file:
 
     For example, if adding Dockerfile for ecommerce, rabbit mq, replace
 
-    ``images:=$(if $(TRAVIS_COMMIT_RANGE),$(shell git diff --name-only $(TRAVIS_COMMIT_RANGE) | python util/parsefiles.py),$(all_images))``
+    ``images:=$(shell git diff --name-only $(TRAVIS_COMMIT_RANGE) | python util/parsefiles.py)``
 
     with
 
