@@ -9,6 +9,7 @@ jenkins_common_nginx_port: 80
 jenkins_common_protocol_https: true
 
 JENKINS_SERVER_NAME: jenkins.example.org
+jenkins_node_usage: EXCLUSIVE
 
 jenkins_common_debian_pkgs:
   - nginx

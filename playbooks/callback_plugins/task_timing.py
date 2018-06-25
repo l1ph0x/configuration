@@ -13,7 +13,9 @@ except ImportError:
     # Support Ansible 1.9.x
     CallbackBase = object
 
-import datadog
+# Commented out because a) I don't believe we use datadog anymore and b) even though I have it
+# disabled in my role and installed in pip, the import still creates unreferenced errors in ansible
+# import datadog
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout)
 logging.getLogger("requests").setLevel(logging.WARNING)
@@ -85,12 +87,12 @@ class DatadogTimingLogger(TimingLogger):
         self.datadog_api_key = os.getenv('DATADOG_API_KEY')
         self.datadog_api_initialized = False
 
-        if self.datadog_api_key:
-            datadog.initialize(
-                api_key=self.datadog_api_key,
-                app_key=None
-            )
-            self.datadog_api_initialized = True
+        # if self.datadog_api_key:
+        #     datadog.initialize(
+        #         api_key=self.datadog_api_key,
+        #         app_key=None
+        #     )
+        #     self.datadog_api_initialized = True
 
     def clean_tag_value(self, value):
         """
@@ -116,17 +118,17 @@ class DatadogTimingLogger(TimingLogger):
                     'playbook:{0}'.format(self.clean_tag_value(playbook_name))
                 ]
             })
-        try:
-            datadog.api.Metric.send(datadog_tasks_metrics)
-            datadog.api.Metric.send(
-                metric="edx.ansible.playbook_duration",
-                date_happened=time.mktime(playbook_timestamp.start.timetuple()),
-                points=playbook_timestamp.duration.total_seconds(),
-                tags=["playbook:{0}".format(self.clean_tag_value(playbook_name))]
-            )
-        except Exception:
-            LOGGER.exception("Failed to log timing data to datadog")
-
+        # try:
+        #     datadog.api.Metric.send(datadog_tasks_metrics)
+        #     datadog.api.Metric.send(
+        #         metric="edx.ansible.playbook_duration",
+        #         date_happened=time.mktime(playbook_timestamp.start.timetuple()),
+        #         points=playbook_timestamp.duration.total_seconds(),
+        #         tags=["playbook:{0}".format(self.clean_tag_value(playbook_name))]
+        #     )
+        # except Exception:
+        #     LOGGER.exception("Failed to log timing data to datadog")
+        #
 
 class JsonTimingLogger(TimingLogger):
     """
